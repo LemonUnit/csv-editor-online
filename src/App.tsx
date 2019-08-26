@@ -1,26 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Navigation } from "./components/Navigation";
+import { SourceItems } from "./editors/types";
+import { CSVEditor } from "./editors/CSVEditor";
+import { JSONEditor } from "./editors/JSONEditor";
+import { DataGridEditor } from "./editors/DataGridEditor";
+
+import "./App.css";
+
+export enum EditorMode {
+  CSV = "CSV",
+  GRID = "GRID",
+  JSON = "JSON"
 }
 
-export default App;
+interface AppProps { }
+
+interface AppState {
+  mode: EditorMode;
+  source: SourceItems;
+}
+
+const modeToComponentMap = Object.freeze({
+  [EditorMode.CSV]: CSVEditor,
+  [EditorMode.JSON]: JSONEditor,
+  [EditorMode.GRID]: DataGridEditor,
+})
+
+export class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      mode: EditorMode.CSV,
+      source: []
+    }
+  }
+
+  handleModeChange = (mode: EditorMode) => this.setState({ mode })
+
+  handleSourceChange = (source: SourceItems) => this.setState({ source })
+
+  render() {
+    const EditorComponent = modeToComponentMap[this.state.mode] || <div>Error</div>;
+
+    return (
+      <div>
+        <Navigation
+          mode={this.state.mode}
+          onModeChange={this.handleModeChange}
+        />
+        <main className="Editor" >
+          <EditorComponent
+            onSourceChange={this.handleSourceChange}
+            source={this.state.source}
+          />
+        </main>
+      </div>
+    )
+  }
+}

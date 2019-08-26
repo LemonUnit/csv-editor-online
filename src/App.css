@@ -1,33 +1,46 @@
-.App {
-  text-align: center;
+.logo {
+  color: #fff;
+  float: left;
+  margin-right: 30px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.Editor {
+  width: 100vw;
+  height: calc(100vh - 64px);
+  overflow: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ant-layout-header {
+  padding: 0 30px !important;
 }
 
-.App-link {
-  color: #61dafb;
+.Spreadsheet {
+  font-size: 12px !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Spreadsheet th {
+  min-width: 30px !important;
+  min-height: 20px !important;
+}
+
+.Spreadsheet td {
+  min-width: 100px !important;
+  min-height: 20px !important;
+}
+
+.SpreadsheetTable tr:nth-child(2) td {
+  font-weight: bold;
+}
+
+.ConfigBar {
+  padding: 5px 30px;
+  background: #fff;
+  height: 40px;
+  font-size: 12px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.ConfigBar .ConfigBarWidgetLabel {
+  padding-right: 10px;
+  color: #777;
 }
