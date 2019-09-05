@@ -1,6 +1,7 @@
 {
     "name": "csv-editor-online",
-    "version": "UNRELEASED",
+    "version": "0.1.0",
+    "homepage": "http://lemonunit.github.io/csv-editor-online",
     "dependencies": {
         "@types/jest": "24.0.18",
         "@types/node": "12.7.2",
@@ -23,7 +24,9 @@
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -44,6 +47,7 @@
         "@types/throttle-debounce": "^2.1.0",
         "babel-plugin-import": "^1.12.1",
         "eslint-utils": "1.4.1",
+        "gh-pages": "^2.1.1",
         "less": "^3.10.3",
         "less-loader": "^5.0.0"
     }
