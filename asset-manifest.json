@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/csv-editor-online/static/css/main.b63a8869.chunk.css",
+    "main.js": "/csv-editor-online/static/js/main.88fc8f8e.chunk.js",
+    "main.js.map": "/csv-editor-online/static/js/main.88fc8f8e.chunk.js.map",
+    "runtime~main.js": "/csv-editor-online/static/js/runtime~main.c91a9861.js",
+    "runtime~main.js.map": "/csv-editor-online/static/js/runtime~main.c91a9861.js.map",
+    "static/css/2.12b24f9e.chunk.css": "/csv-editor-online/static/css/2.12b24f9e.chunk.css",
+    "static/js/2.83c4e7e2.chunk.js": "/csv-editor-online/static/js/2.83c4e7e2.chunk.js",
+    "static/js/2.83c4e7e2.chunk.js.map": "/csv-editor-online/static/js/2.83c4e7e2.chunk.js.map",
+    "index.html": "/csv-editor-online/index.html",
+    "precache-manifest.c584f5d913c0b0201d2156ce89656309.js": "/csv-editor-online/precache-manifest.c584f5d913c0b0201d2156ce89656309.js",
+    "service-worker.js": "/csv-editor-online/service-worker.js",
+    "static/css/2.12b24f9e.chunk.css.map": "/csv-editor-online/static/css/2.12b24f9e.chunk.css.map",
+    "static/css/main.b63a8869.chunk.css.map": "/csv-editor-online/static/css/main.b63a8869.chunk.css.map"
+  }
+}
