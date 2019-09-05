@@ -43,6 +43,7 @@
     "devDependencies": {
         "@types/throttle-debounce": "^2.1.0",
         "babel-plugin-import": "^1.12.1",
+        "eslint-utils": "1.4.1",
         "less": "^3.10.3",
         "less-loader": "^5.0.0"
     }
