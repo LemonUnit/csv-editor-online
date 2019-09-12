@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/csv-editor-online/precache-manifest.5e16cb82d711ec6768c9c732b013b2f9.js"
+  "/csv-editor-online/precache-manifest.8f2d90d51b612ed5b2a4eb6d914e9b6b.js"
 );
 
 self.addEventListener('message', (event) => {
