@@ -75,6 +75,11 @@ export class DataGridEditor extends Component<Props, State> {
 
     for (let rowIndex = 0; rowIndex < sourceRowsLength; rowIndex++) {
       const row = source[rowIndex];
+
+      if (!row) {
+        continue;
+      }
+
       const rowColumnsLength = row.length;
 
       if (!grid[rowIndex]) {
@@ -113,10 +118,17 @@ export class DataGridEditor extends Component<Props, State> {
   updateSourceItemsByDataGrid = () => {
     const { grid } = this.state;
 
-    const gridRows = [...grid];
     const sourceItems: CellItem[][] = [];
 
+    const reverseGridRows = [...grid].reverse();
+    const notEmptyGridRowIndex = reverseGridRows.findIndex(rowCells => rowCells.some(cell => Boolean(cell.value)));
+    const gridRows = reverseGridRows.slice(notEmptyGridRowIndex).reverse();
+
     for (let gridRowIndex = 0, gridRowsLength = gridRows.length; gridRowIndex < gridRowsLength; gridRowIndex++) {
+      if (!sourceItems[gridRowIndex]) {
+        sourceItems[gridRowIndex] = []
+      }
+
       const reverseGridRows = [...gridRows[gridRowIndex]].reverse();
 
       const notEmptyCellIndex = reverseGridRows.findIndex(item => Boolean(item.value));
@@ -124,10 +136,6 @@ export class DataGridEditor extends Component<Props, State> {
 
       if (notEmptyCellIndex < 0) {
         continue;
-      }
-
-      if (!sourceItems[gridRowIndex]) {
-        sourceItems[gridRowIndex] = []
       }
 
       for (let nonEmptyCellIndex = 0; nonEmptyCellIndex < nonEmptyCells.length; nonEmptyCellIndex++) {
@@ -147,7 +155,7 @@ export class DataGridEditor extends Component<Props, State> {
       this.setState({
         grid: [
           ...grid,
-          ...getMultipleEmptyRows(10, grid[0].length)
+          ...getMultipleEmptyRows(10, grid[0] ? grid[0].length : MIN_GRID_COLUMNS)
         ]
       });
     }
