@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
-import { Radio } from "antd";
+import { Radio, Modal } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 // @ts-ignore
 import * as csvString from "csv-string";
@@ -12,7 +12,7 @@ import "brace/mode/json";
 import { EditorProps } from "./types";
 import { NAVIGATION_HEIGHT, CONFIG_BAR_HEIGHT } from "../components/Navigation";
 
-enum CSVDelimeter {
+enum CSVDelimiter {
   SEMICOLON = ";",
   COMMA = ",",
   VARTICAL_BAR = "|"
@@ -22,22 +22,22 @@ interface Props extends EditorProps { }
 
 interface State {
   csv: string;
-  delimeter: CSVDelimeter;
+  delimiter: CSVDelimiter;
   editorHeight: number;
 }
 
 const defaultState: State = {
   csv: "",
   editorHeight: 0,
-  delimeter: CSVDelimeter.SEMICOLON
+  delimiter: CSVDelimiter.SEMICOLON
 }
 
 export class CSVEditor extends Component<Props, State> {
   state = {
     ...defaultState,
-    delimeter: 'localStorage' in window
-      ? window.localStorage.getItem('delimeter') as CSVDelimeter || CSVDelimeter.SEMICOLON
-      : CSVDelimeter.SEMICOLON
+    delimiter: 'localStorage' in window
+      ? window.localStorage.getItem('delimiter') as CSVDelimiter || CSVDelimiter.SEMICOLON
+      : CSVDelimiter.SEMICOLON
   };
 
   componentDidMount() {
@@ -58,11 +58,11 @@ export class CSVEditor extends Component<Props, State> {
   })
 
   parseSourceItemsToCsv = () => this.setState({
-    csv: csvString.stringify(this.props.source, this.state.delimeter)
+    csv: csvString.stringify(this.props.source, this.state.delimiter)
   });
 
   updateSourceItemsByCsvString = () => {
-    const sourceItems = csvString.parse(this.state.csv);
+    const sourceItems = csvString.parse(this.state.csv, this.state.delimiter);
 
     this.props.onSourceChange(sourceItems);
   }
@@ -71,17 +71,32 @@ export class CSVEditor extends Component<Props, State> {
     csv
   }, () => this.updateSourceItemsByCsvString());
 
-  handleDelimeterChange = (e: RadioChangeEvent) => {
+  handleDelimiterChange = (e: RadioChangeEvent) => {
     const { value } = e.target;
 
-    this.setState({
-      delimeter: value
-    });
-
-    if ('localStorage' in window) {
-      window.localStorage.setItem('delimeter', value);
+    if (!this.state.csv.trim()) {
+      return this.updateDelimiter(value);
     }
+
+    Modal.confirm({
+      title: 'Do you want to update CSV string to new delimiter?',
+      content: '',
+      onOk: () => this.updateCSVStringDelimiter(value),
+      onCancel: () => this.updateDelimiter(value)
+    });
   }
+
+  updateCSVStringDelimiter = (delimiter: CSVDelimiter) => this.setState({
+    csv: csvString.stringify(csvString.parse(this.state.csv, this.state.delimiter), delimiter)
+  }, () => this.updateDelimiter(delimiter));
+
+  updateDelimiter = (delimiter: CSVDelimiter) => this.setState({
+    delimiter
+  }, () => {
+    if ('localStorage' in window) {
+      window.localStorage.setItem('delimiter', delimiter);
+    }
+  });
 
   renderConfigBar = () => (
     <div className="ConfigBar">
@@ -89,14 +104,14 @@ export class CSVEditor extends Component<Props, State> {
         <span className="ConfigBarWidgetLabel">CSV Delimeter:</span>
         <span className="ConfigBarWidgetContent">
           <Radio.Group
-            onChange={this.handleDelimeterChange}
-            value={this.state.delimeter}
+            onChange={this.handleDelimiterChange}
+            value={this.state.delimiter}
             size="small"
           >
             {[
-              CSVDelimeter.SEMICOLON,
-              CSVDelimeter.COMMA,
-              CSVDelimeter.VARTICAL_BAR
+              CSVDelimiter.SEMICOLON,
+              CSVDelimiter.COMMA,
+              CSVDelimiter.VARTICAL_BAR
             ].map((item, index) => (
               <Radio
                 key={`item_${index}`}
