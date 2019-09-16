@@ -11,6 +11,7 @@ import "brace/mode/json";
 
 import { EditorProps } from "./types";
 import { NAVIGATION_HEIGHT, CONFIG_BAR_HEIGHT } from "../components/Navigation";
+import { FOOTER_HEIGHT } from "../components/Footer";
 
 enum CSVDelimiter {
   SEMICOLON = ";",
@@ -54,7 +55,7 @@ export class CSVEditor extends Component<Props, State> {
   }
 
   updateEditorHeight = () => this.setState({
-    editorHeight: window.innerHeight - NAVIGATION_HEIGHT - CONFIG_BAR_HEIGHT
+    editorHeight: window.innerHeight - NAVIGATION_HEIGHT - FOOTER_HEIGHT - CONFIG_BAR_HEIGHT
   })
 
   parseSourceItemsToCsv = () => this.setState({

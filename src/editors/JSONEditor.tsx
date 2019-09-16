@@ -7,6 +7,7 @@ import "brace/mode/json";
 
 import { EditorProps } from "./types";
 import { NAVIGATION_HEIGHT } from "../components/Navigation";
+import { FOOTER_HEIGHT } from "../components/Footer";
 
 interface Props extends EditorProps { }
 
@@ -37,7 +38,7 @@ export class JSONEditor extends Component<Props, State> {
   }
 
   updateEditorHeight = () => this.setState({
-    editorHeight: window.innerHeight - NAVIGATION_HEIGHT
+    editorHeight: window.innerHeight - FOOTER_HEIGHT - NAVIGATION_HEIGHT
   })
 
   parseSourceItemsToJson = () => this.setState({
