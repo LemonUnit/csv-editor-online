@@ -6,7 +6,7 @@
 
 .Editor {
   width: 100vw;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 64px - 30px);
   overflow: auto;
 }
 
@@ -43,4 +43,38 @@
 .ConfigBar .ConfigBarWidgetLabel {
   padding-right: 10px;
   color: #777;
+}
+
+.Footer {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  background: #fff;
+  font-size: 13px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.GitHubIcon {
+  color: #ccc;
+  font-size: 20px;
+}
+
+.GitHubIcon:hover {
+  color: #333;
+}
+
+.LemonUnitIcon {
+  position: relative;
+}
+
+.LemonUnitIcon img {
+  top: -1px;
+  position: relative;
+  height: 24px;
+  opacity: 0.4;
+  transition: opacity 0.4s ease-out;
+}
+
+.LemonUnitIcon:hover img {
+  opacity: 1;
 }

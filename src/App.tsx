@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import { Navigation } from "./components/Navigation";
+import { Footer } from "./components/Footer";
+
 import { SourceItems } from "./editors/types";
 import { CSVEditor } from "./editors/CSVEditor";
 import { JSONEditor } from "./editors/JSONEditor";
@@ -55,6 +57,7 @@ export class App extends Component<AppProps, AppState> {
             source={this.state.source}
           />
         </main>
+        <Footer />
       </div>
     )
   }
