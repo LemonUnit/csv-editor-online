@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Icon } from "antd";
 
 import { EditorMode } from "../App";
 
